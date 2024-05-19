@@ -1,5 +1,5 @@
 from customtkinter import CTk
-from PythonProjects.CadUpgrade.ApplicationProject.interface import Janela
+from interface import Janela
 from functions import Services
 
 class Application:
