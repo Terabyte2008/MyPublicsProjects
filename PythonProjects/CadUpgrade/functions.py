@@ -1,4 +1,4 @@
-from data import DataBase
+from PythonProjects.CadUpgrade.ApplicationProject.data import DataBase
 from tkinter.constants import END
 
 class Services(DataBase):
