@@ -48,22 +48,22 @@ class Frames:
         self.nome_entry.place(relx=0.05, rely=0.29, relwidth=0.4, relheight=0.082)
 
         self.fone_entry = CTkEntry(self.frame1, placeholder_text="Telefone...")
-        self.fone_entry.place(relx=0.31, rely=0.4, relwidth=0.14, relheight=0.082)
+        self.fone_entry.place(relx=0.05, rely=0.51, relwidth=0.14, relheight=0.082)
 
         self.nascimento_entry = CTkEntry(self.frame1, placeholder_text="Nascimento...")
-        self.nascimento_entry.place(relx=0.48, rely=0.4, relwidth=0.14, relheight=0.082)
+        self.nascimento_entry.place(relx=0.25, rely=0.51, relwidth=0.14, relheight=0.082)
 
         self.rg_cnh_entry = CTkEntry(self.frame1, placeholder_text="RG ou CNH...")
-        self.rg_cnh_entry.place(relx=0.69, rely=0.4, relwidth=0.16, relheight=0.082)
+        self.rg_cnh_entry.place(relx=0.72, rely=0.4, relwidth=0.16, relheight=0.082)
 
         self.endereco_entry = CTkEntry(self.frame1, placeholder_text="Endereço...")
-        self.endereco_entry.place(relx=0.48, rely=0.29, relwidth=0.37, relheight=0.082)
+        self.endereco_entry.place(relx=0.05, rely=0.4, relwidth=0.37, relheight=0.082)
 
         self.banco_entry = CTkEntry(self.frame1, placeholder_text="Banco...")
-        self.banco_entry.place(relx=0.05, rely=0.51, relwidth=0.2, relheight=0.082)
+        self.banco_entry.place(relx=0.48, rely=0.29, relwidth=0.2, relheight=0.082)
 
         self.agencia_entry = CTkEntry(self.frame1, placeholder_text="Agência...")
-        self.agencia_entry.place(relx=0.28, rely=0.51, relwidth=0.17, relheight=0.082)
+        self.agencia_entry.place(relx=0.71, rely=0.29, relwidth=0.17, relheight=0.082)
 
         self.conta_entry = CTkEntry(self.frame1, placeholder_text="Conta...")
         self.conta_entry.place(relx=0.48, rely=0.51, relwidth=0.14, relheight=0.082)
@@ -72,13 +72,16 @@ class Frames:
         self.codigo_entry.place(relx=0.27, rely=0.105, relwidth=0.16, relheight=0.082)
 
         self.ult_op_entry = CTkEntry(self.frame1, placeholder_text="Ultima Operação...")
-        self.ult_op_entry.place(relx=0.69, rely=0.51, relwidth=0.16, relheight=0.082)
+        self.ult_op_entry.place(relx=0.72, rely=0.51, relwidth=0.16, relheight=0.082)
+
+        self.cpf_entry = CTkEntry(self.frame1, placeholder_text="CPF...")
+        self.cpf_entry.place(relx=0.48, rely=0.4, relwidth=0.16, relheight=0.082)
     
     def criar_lista(self) -> None:
         self.lista_clientes = ttk.Treeview(self.frame2,
                                            columns=('col0', 'col1', 'col2', 'col3', 
                                                     'col5', 'col6', 'col7', 
-                                                    'col8', 'col9', 'col10'))
+                                                    'col8', 'col9', 'col10', 'col11'))
         self.lista_clientes.heading('#0', text='')
         self.lista_clientes.heading("#1", text='Código')
         self.lista_clientes.heading("#2", text='Nome')
@@ -87,9 +90,10 @@ class Frames:
         self.lista_clientes.heading("#5", text='Telefone')
         self.lista_clientes.heading("#6", text='Nascimento')
         self.lista_clientes.heading("#7", text='RG / CNH')
-        self.lista_clientes.heading("#8", text='Banco')
-        self.lista_clientes.heading("#9", text='Agencia')
-        self.lista_clientes.heading("#10", text='Conta')
+        self.lista_clientes.heading('#8', text='CPF')
+        self.lista_clientes.heading("#9", text='Banco')
+        self.lista_clientes.heading("#10", text='Agencia')
+        self.lista_clientes.heading("#11", text='Conta')
 
         self.lista_clientes.column('#0', width=0)
         self.lista_clientes.column("#1", width=10)
@@ -98,10 +102,11 @@ class Frames:
         self.lista_clientes.column("#4", width=40)
         self.lista_clientes.column("#5", width=35)
         self.lista_clientes.column("#6", width=25)
-        self.lista_clientes.column("#7", width=41)
-        self.lista_clientes.column("#8", width=41)
+        self.lista_clientes.column("#7", width=35)
+        self.lista_clientes.column("#8", width=45)
         self.lista_clientes.column("#9", width=41)
         self.lista_clientes.column("#10", width=41)
+        self.lista_clientes.column("#11", width=41)
         self.lista_clientes.place(relx=0.01, rely=0.05, relwidth=0.97, relheight=0.85)
 
         self.scroll_lista = CTkScrollbar(self.frame2, orientation='vertical')

@@ -22,7 +22,8 @@ class DataBase:
                                     banco CHAR(25),
                                     agencia CHAR(25),
                                     conta CHAR(20),
-                                    rg_cnh CHAR(25)
+                                    rg_cnh CHAR(25),
+                                    cpf CHAR(20)
                                 );
                             """)
         self.conn.commit(); print("Banco de dados criado")

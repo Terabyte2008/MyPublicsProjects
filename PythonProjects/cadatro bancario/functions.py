@@ -4,7 +4,6 @@ from tkinter.constants import END
 class Services(DataBase):
 
     def __init__(self, frames) -> None:
-        super().__init__()
         self.frame = frames
     
     def variaveis(self):
@@ -18,15 +17,16 @@ class Services(DataBase):
         self.rg_cnh = self.frame.rg_cnh_entry.get()
         self.conta = self.frame.conta_entry.get()
         self.ult_op = self.frame.ult_op_entry.get()
+        self.cpf = self.frame.cpf_entry.get()
 
     def add_cliente(self):
         self.variaveis()
         self.connect()
         self.cursor.execute("""INSERT INTO cadastroclientes (nome_cliente, endereco, ult_op, telefone, 
-                            nascimento, rg_cnh, banco, agencia, conta )
-                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""", 
+                            nascimento, rg_cnh, cpf, banco, agencia, conta )
+                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""", 
                             (self.nome, self.endereco, self.ult_op, self.telefone, self.nascimento, self.rg_cnh,
-                             self.banco, self.agencia, self.conta))
+                             self.cpf, self.banco, self.agencia, self.conta))
         self.conn.commit()
         self.disconnect()
         self.select_lista()
@@ -37,7 +37,7 @@ class Services(DataBase):
         self.connect()
         lista = self.cursor.execute("""SELECT
                             cod, nome_cliente, endereco, ult_op, telefone,
-                            nascimento, rg_cnh, banco, agencia, conta FROM cadastroclientes
+                            nascimento, rg_cnh, cpf,  banco, agencia, conta FROM cadastroclientes
                             ORDER BY nome_cliente ASC""")
         for row in lista:
             self.frame.lista_clientes.insert("", "end", values=row)
@@ -54,6 +54,7 @@ class Services(DataBase):
         self.frame.rg_cnh_entry.delete(0, 'end')
         self.frame.nascimento_entry.delete(0, 'end')
         self.frame.ult_op_entry.delete(0, 'end')
+        self.frame.cpf_entry.delete(0, 'end')
         self.frame.criar_entries()
 
     def ondoubleclick(self, event):
@@ -61,7 +62,7 @@ class Services(DataBase):
         self.frame.lista_clientes.selection()
 
         for n in self.frame.lista_clientes.selection():
-            col1, col2, col3, col4, col5, col6, col7, col8, col9, col10 = self.frame.lista_clientes.item(n, 'values')
+            col1, col2, col3, col4, col5, col6, col7, col8, col9, col10, col11 = self.frame.lista_clientes.item(n, 'values')
             self.frame.codigo_entry.insert(END, col1)
             self.frame.nome_entry.insert(END, col2)
             self.frame.endereco_entry.insert(END, col3)
@@ -69,9 +70,10 @@ class Services(DataBase):
             self.frame.fone_entry.insert(END, col5)
             self.frame.nascimento_entry.insert(END, col6)
             self.frame.rg_cnh_entry.insert(END, col7)
-            self.frame.banco_entry.insert(END, col8)
-            self.frame.agencia_entry.insert(END, col9)
-            self.frame.conta_entry.insert(END, col10)
+            self.frame.cpf_entry.insert(END, col8)
+            self.frame.banco_entry.insert(END, col9)
+            self.frame.agencia_entry.insert(END, col10)
+            self.frame.conta_entry.insert(END, col11)
 
     def deleta_cliente(self):
         self.variaveis()
@@ -90,7 +92,7 @@ class Services(DataBase):
         nome = self.frame.nome_entry.get()
         self.cursor.execute("""SELECT cod, nome_cliente, 
                             telefone, nascimento, endereco, 
-                            ult_op, banco, agencia, conta, rg_cnh
+                            ult_op, cpf, banco, agencia, conta, rg_cnh
                             FROM cadastroclientes WHERE nome_cliente LIKE '%s'
                             ORDER BY nome_cliente ASC""" % nome)
         busca_nome = self.cursor.fetchall()
@@ -104,10 +106,10 @@ class Services(DataBase):
         self.connect()
         self.cursor.execute(""" UPDATE cadastroclientes 
             SET nome_cliente = ?, telefone = ?, nascimento = ?, 
-            endereco = ?, ult_op = ?, banco = ?, agencia = ?, 
+            endereco = ?, ult_op = ?, cpf = ?, banco = ?, agencia = ?, 
             conta = ?, rg_cnh = ? WHERE cod = ?""", 
             (self.nome, self.telefone, self.nascimento, 
-             self.endereco, self.ult_op, self.banco, self.agencia, 
+             self.endereco, self.ult_op, self.cpf, self.banco, self.agencia, 
              self.conta, self.rg_cnh, self.codigo))
         self.conn.commit()
         self.disconnect()
